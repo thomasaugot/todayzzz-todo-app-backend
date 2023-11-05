@@ -1,19 +1,20 @@
-// ℹ️ package responsible to make the connection with mongodb
-// https://www.npmjs.com/package/mongoose
-const mongoose = require("mongoose");
+const mysql = require("mysql2");
 
-// ℹ️ Sets the MongoDB URI for our app to have access to it.
-// If no env has been set, we dynamically set it to whatever the folder name was upon the creation of the app
+const MYSQL_URI = process.env.MYSQL_URI || {
+  host: "localhost",
+  user: process.env.MYSQL_USERNAME,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE,
+};
 
-const MONGO_URI =
-  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/typescript-todo-app-backend";
+const connection = mysql.createConnection(MYSQL_URI);
 
-mongoose
-  .connect(MONGO_URI)
-  .then((x) => {
-    const dbName = x.connections[0].name;
-    console.log(`Connected to Mongo! Database name: "${dbName}"`);
-  })
-  .catch((err) => {
-    console.error("Error connecting to mongo: ", err);
-  });
+connection.connect((err) => {
+  if (err) {
+    console.error("Error connecting to MySQL: ", err);
+  } else {
+    console.log("Connected to MySQL!");
+  }
+});
+
+module.exports = connection;
