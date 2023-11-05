@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "lib": ["es6"],
+    "outDir": "./dist",
+    "strict": true
+  },
+  "include": ["*.tsx"],
+  "exclude": ["node_modules"],
+  "jsx": "preserve"
+}
