@@ -1,7 +1,14 @@
-const { Schema, model } = require("mongoose");
+import { Schema, Document, model } from "mongoose";
 
-// TODO: Please make sure you edit the User model to whatever makes sense in this case
-const userSchema = new Schema(
+interface IUser extends Document {
+  email: string;
+  password: string;
+  name: string;
+  todos: string[];
+  collections: string[];
+}
+
+const userSchema = new Schema<IUser>(
   {
     email: {
       type: String,
@@ -18,13 +25,18 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Name is required."],
     },
+    todos: {
+      type: [String],
+    },
+    collections: {
+      type: [String],
+    },
   },
   {
-    // this second object adds extra properties: `createdAt` and `updatedAt`
     timestamps: true,
   }
 );
 
-const User = model("User", userSchema);
+const User = model<IUser>("User", userSchema);
 
-module.exports = User;
+export default User;
