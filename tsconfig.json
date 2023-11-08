@@ -9,7 +9,7 @@
     "strict": true,
     "moduleResolution": "Node"
   },
-  "include": ["./**/*.tsx", "./**/*.ts", "server.ts"],
+  "include": ["./**/*.tsx", "./**/*.ts", "./**/*.tsc", "db/index.ts"],
   "exclude": ["node_modules"],
   "jsx": "preserve",
   "ts-node": {

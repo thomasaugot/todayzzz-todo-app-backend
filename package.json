@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --loader ts-node/esm server.ts"
+    "start": "nodemon server.ts"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -16,7 +16,8 @@
     "mongoose": "^8.0.0",
     "morgan": "^1.10.0",
     "mysql2": "^3.6.3",
-    "pg": "^8.11.3"
+    "pg": "^8.11.3",
+    "pg-types": "^4.0.1"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.5",
