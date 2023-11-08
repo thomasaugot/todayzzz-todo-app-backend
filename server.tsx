@@ -1,8 +1,13 @@
-// @ts-ignore
-import app from "./app";
+import cors from "cors";
+import { PORT } from "./config";
+import express from "express";
 
-const PORT: number | string = process.env.PORT || 5005;
+const app = express();
+
+app.use(cors());
 
 app.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
+  console.log(`Server is up and listening on port ${PORT}`);
 });
+
+export default app;
