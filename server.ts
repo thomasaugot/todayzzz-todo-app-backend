@@ -1,5 +1,5 @@
 import cors from "cors";
-import { PORT } from "./config.js";
+import { PORT } from "./config";
 import express from "express";
 
 const app = express();

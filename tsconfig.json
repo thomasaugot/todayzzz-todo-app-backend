@@ -2,14 +2,18 @@
   "compilerOptions": {
     "target": "es6",
     "jsx": "preserve",
-    "module": "commonjs",
+    "module": "es6",
     "lib": ["es6"],
     "outDir": "./dist",
     "esModuleInterop": true,
-    "strict": true
+    "strict": true,
+    "moduleResolution": "Node"
   },
-  "include": ["*.tsx", "*.js", "*.mjs"],
+  "include": ["./**/*.tsx", "./**/*.ts", "server.ts"],
   "exclude": ["node_modules"],
   "jsx": "preserve",
-  "type": "module"
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  }
 }
