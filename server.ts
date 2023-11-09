@@ -116,7 +116,7 @@ app.delete("/api/users/:user_id", async (req: Request, res: Response) => {
 ///////////////////////////// COLLECTIONS ROUTES ////////////////////////////////////////////////////
 
 // Create a Collection
-app.post("/collections", async (req: Request, res: Response) => {
+app.post("/api/collections", async (req: Request, res: Response) => {
   try {
     const { name, todo_items, user_id } = req.body;
     const newCollection = await pool.query(
@@ -137,25 +137,24 @@ app.post("/collections", async (req: Request, res: Response) => {
 });
 
 // Get All Collections
-app.get("/collections", async (req: Request, res: Response) => {
-  console.log("hellooooo");
-  // try {
-  //   // const allCollections = await pool.query('SELECT * FROM collections');
+app.get("/api/collections", async (req: Request, res: Response) => {
+  try {
+    // const allCollections = await pool.query('SELECT * FROM collections');
 
-  //   res.status(200).json({
-  //     status: 'success',
-  //     data: {
-  //       collections: ['hello', 'hey'],
-  //     },
-  //   });
-  // } catch (err) {
-  //   console.error(err);
-  //   res.status(500).json({ error: 'Internal Server Error' });
-  // }
+    res.status(200).json({
+      status: "success",
+      data: {
+        collections: ["hello", "hey"],
+      },
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
 // Get Collection by ID
-app.get("/collections/:collection_id", async (req: Request, res: Response) => {
+app.get("/api/collections/:collection_id", async (req: Request, res: Response) => {
   try {
     const collectionId = req.params.collection_id;
     const currentCollection = await pool.query(
@@ -184,7 +183,7 @@ app.get("/collections/:collection_id", async (req: Request, res: Response) => {
 });
 
 // Update Collection by ID
-app.put("/collections/:collection_id", async (req: Request, res: Response) => {
+app.put("/api/collections/:collection_id", async (req: Request, res: Response) => {
   try {
     const collectionId = req.params.collection_id;
     const { name, todo_items } = req.body;
@@ -214,7 +213,7 @@ app.put("/collections/:collection_id", async (req: Request, res: Response) => {
 });
 
 // Delete Collection by ID
-app.delete("/collections/:collection_id", async (req: Request, res: Response) => {
+app.delete("/api/collections/:collection_id", async (req: Request, res: Response) => {
   try {
     const collectionId = req.params.collection_id;
     const deletedCollection = await pool.query(
