@@ -137,23 +137,6 @@ app.post("/api/collections", async (req: Request, res: Response) => {
   }
 });
 
-// Get All Collections
-app.get("/api/collections", async (req: Request, res: Response) => {
-  try {
-    // const allCollections = await pool.query('SELECT * FROM collections');
-
-    res.status(200).json({
-      status: "success",
-      data: {
-        collections: ["hello", "hey"],
-      },
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
 // Get Collection by ID
 app.get("/api/collections/:collection_id", async (req: Request, res: Response) => {
   try {
