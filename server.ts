@@ -35,7 +35,7 @@ app.post("/api/users", async (req: Request, res: Response) => {
 // Get User by ID
 app.get("/api/users/:user_id", async (req: Request, res: Response) => {
   try {
-    const userId = req.params.user_id;
+    const userId = 1;
     const currentUser = await pool.query("SELECT * FROM users WHERE user_id = $1", [userId]);
 
     if (currentUser.rows.length === 0) {
@@ -43,6 +43,7 @@ app.get("/api/users/:user_id", async (req: Request, res: Response) => {
         status: "error",
         message: "User not found",
       });
+      console.log(currentUser);
       return;
     }
 
