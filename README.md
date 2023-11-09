@@ -107,13 +107,10 @@ The server should now be running and listening on the specified port.
     Endpoint: DELETE /api/todo_items/:todo_item_id<br>
     Response: No content
 
-Contributing
-Please refer to the CONTRIBUTING.md for information on how to contribute to this project.
-
-### Tech stack
+## Tech stack
 
 This project was built using React, Typescript, Express, Node.js, PostgrSQL, Jest and SCSS.
 
-### Demo
+## Demo
 
 Access the live website at https://todayzzz-todos.netlify.app/
