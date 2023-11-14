@@ -228,7 +228,7 @@ app.delete("/api/collections/:collection_id", async (req: Request, res: Response
 app.post("/api/todo_items", async (req: Request, res: Response) => {
   try {
     const { content, user_id, collection_id, is_done } = req.body;
-    const newTodoItem = await pool.query(
+    const newTodo = await pool.query(
       "INSERT INTO todo_items (content, user_id, collection_id, is_done) VALUES ($1, $2, $3, $4) RETURNING *",
       [content, user_id, collection_id, is_done]
     );
@@ -236,7 +236,7 @@ app.post("/api/todo_items", async (req: Request, res: Response) => {
     res.status(201).json({
       status: "success",
       data: {
-        todo_item: newTodoItem.rows[0],
+        todo_item: newTodo.rows[0],
       },
     });
   } catch (err) {
@@ -248,12 +248,12 @@ app.post("/api/todo_items", async (req: Request, res: Response) => {
 // Get Todo Item by ID
 app.get("/api/todo_items/:todo_item_id", async (req: Request, res: Response) => {
   try {
-    const todoItemId = req.params.todo_item_id;
-    const currentTodoItem = await pool.query("SELECT * FROM todo_items WHERE todo_item_id = $1", [
-      todoItemId,
+    const TodoId = req.params.todo_item_id;
+    const currentTodo = await pool.query("SELECT * FROM todo_items WHERE todo_item_id = $1", [
+      TodoId,
     ]);
 
-    if (currentTodoItem.rows.length === 0) {
+    if (currentTodo.rows.length === 0) {
       res.status(404).json({
         status: "error",
         message: "Todo item not found",
@@ -264,7 +264,7 @@ app.get("/api/todo_items/:todo_item_id", async (req: Request, res: Response) => 
     res.status(200).json({
       status: "success",
       data: {
-        todo_item: currentTodoItem.rows[0],
+        todo_item: currentTodo.rows[0],
       },
     });
   } catch (err) {
@@ -276,14 +276,14 @@ app.get("/api/todo_items/:todo_item_id", async (req: Request, res: Response) => 
 // Update Todo Item by ID
 app.put("/api/todo_items/:todo_item_id", async (req: Request, res: Response) => {
   try {
-    const todoItemId = req.params.todo_item_id;
+    const TodoId = req.params.todo_item_id;
     const { content, is_done } = req.body;
-    const updatedTodoItem = await pool.query(
+    const updatedTodo = await pool.query(
       "UPDATE todo_items SET content = $1, is_done = $2 WHERE todo_item_id = $3 RETURNING *",
-      [content, is_done, todoItemId]
+      [content, is_done, TodoId]
     );
 
-    if (updatedTodoItem.rows.length === 0) {
+    if (updatedTodo.rows.length === 0) {
       res.status(404).json({
         status: "error",
         message: "Todo item not found",
@@ -294,7 +294,7 @@ app.put("/api/todo_items/:todo_item_id", async (req: Request, res: Response) => 
     res.status(200).json({
       status: "success",
       data: {
-        todo_item: updatedTodoItem.rows[0],
+        todo_item: updatedTodo.rows[0],
       },
     });
   } catch (err) {
@@ -306,13 +306,13 @@ app.put("/api/todo_items/:todo_item_id", async (req: Request, res: Response) => 
 // Delete Todo Item by ID
 app.delete("/api/todo_items/:todo_item_id", async (req: Request, res: Response) => {
   try {
-    const todoItemId = req.params.todo_item_id;
-    const deletedTodoItem = await pool.query(
+    const TodoId = req.params.todo_item_id;
+    const deletedTodo = await pool.query(
       "DELETE FROM todo_items WHERE todo_item_id = $1 RETURNING *",
-      [todoItemId]
+      [TodoId]
     );
 
-    if (deletedTodoItem.rows.length === 0) {
+    if (deletedTodo.rows.length === 0) {
       res.status(404).json({
         status: "error",
         message: "Todo item not found",
@@ -329,7 +329,7 @@ app.delete("/api/todo_items/:todo_item_id", async (req: Request, res: Response) 
   }
 });
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 5006;
 app.listen(port, () => {
   console.log(`server is up and listening on port ${port}`);
 });

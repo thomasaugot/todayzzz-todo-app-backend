@@ -214,11 +214,11 @@ app.delete("/collections/:collection_id", (req, res) => __awaiter(void 0, void 0
 app.post("/api/todo_items", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { content, user_id, collection_id, is_done } = req.body;
-        const newTodoItem = yield pool.query("INSERT INTO todo_items (content, user_id, collection_id, is_done) VALUES ($1, $2, $3, $4) RETURNING *", [content, user_id, collection_id, is_done]);
+        const newTodo = yield pool.query("INSERT INTO todo_items (content, user_id, collection_id, is_done) VALUES ($1, $2, $3, $4) RETURNING *", [content, user_id, collection_id, is_done]);
         res.status(201).json({
             status: "success",
             data: {
-                todo_item: newTodoItem.rows[0],
+                todo_item: newTodo.rows[0],
             },
         });
     }
@@ -230,11 +230,11 @@ app.post("/api/todo_items", (req, res) => __awaiter(void 0, void 0, void 0, func
 // Get Todo Item by ID
 app.get("/api/todo_items/:todo_item_id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const todoItemId = req.params.todo_item_id;
-        const currentTodoItem = yield pool.query("SELECT * FROM todo_items WHERE todo_item_id = $1", [
-            todoItemId,
+        const TodoId = req.params.todo_item_id;
+        const currentTodo = yield pool.query("SELECT * FROM todo_items WHERE todo_item_id = $1", [
+            TodoId,
         ]);
-        if (currentTodoItem.rows.length === 0) {
+        if (currentTodo.rows.length === 0) {
             res.status(404).json({
                 status: "error",
                 message: "Todo item not found",
@@ -244,7 +244,7 @@ app.get("/api/todo_items/:todo_item_id", (req, res) => __awaiter(void 0, void 0,
         res.status(200).json({
             status: "success",
             data: {
-                todo_item: currentTodoItem.rows[0],
+                todo_item: currentTodo.rows[0],
             },
         });
     }
@@ -256,10 +256,10 @@ app.get("/api/todo_items/:todo_item_id", (req, res) => __awaiter(void 0, void 0,
 // Update Todo Item by ID
 app.put("/api/todo_items/:todo_item_id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const todoItemId = req.params.todo_item_id;
+        const TodoId = req.params.todo_item_id;
         const { content, is_done } = req.body;
-        const updatedTodoItem = yield pool.query("UPDATE todo_items SET content = $1, is_done = $2 WHERE todo_item_id = $3 RETURNING *", [content, is_done, todoItemId]);
-        if (updatedTodoItem.rows.length === 0) {
+        const updatedTodo = yield pool.query("UPDATE todo_items SET content = $1, is_done = $2 WHERE todo_item_id = $3 RETURNING *", [content, is_done, TodoId]);
+        if (updatedTodo.rows.length === 0) {
             res.status(404).json({
                 status: "error",
                 message: "Todo item not found",
@@ -269,7 +269,7 @@ app.put("/api/todo_items/:todo_item_id", (req, res) => __awaiter(void 0, void 0,
         res.status(200).json({
             status: "success",
             data: {
-                todo_item: updatedTodoItem.rows[0],
+                todo_item: updatedTodo.rows[0],
             },
         });
     }
@@ -281,9 +281,9 @@ app.put("/api/todo_items/:todo_item_id", (req, res) => __awaiter(void 0, void 0,
 // Delete Todo Item by ID
 app.delete("/api/todo_items/:todo_item_id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const todoItemId = req.params.todo_item_id;
-        const deletedTodoItem = yield pool.query("DELETE FROM todo_items WHERE todo_item_id = $1 RETURNING *", [todoItemId]);
-        if (deletedTodoItem.rows.length === 0) {
+        const TodoId = req.params.todo_item_id;
+        const deletedTodo = yield pool.query("DELETE FROM todo_items WHERE todo_item_id = $1 RETURNING *", [TodoId]);
+        if (deletedTodo.rows.length === 0) {
             res.status(404).json({
                 status: "error",
                 message: "Todo item not found",
