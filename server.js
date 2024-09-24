@@ -1,9 +1,9 @@
-const express = require("express");
-const cors = require("cors");
-const authRoutes = require("./routes/authRoutes");
-const todoRoutes = require("./routes/todoRoutes");
-const collectionRoutes = require("./routes/collectionRoutes");
-const dotenv = require("dotenv");
+import express from "express";
+import cors from "cors";
+import authRoutes from "./routes/authRoutes.js";
+import todoRoutes from "./routes/todoRoutes.js";
+import collectionsRoutes from "./routes/collectionRoutes.js";
+import dotenv from "dotenv";
 
 dotenv.config();
 const app = express();
@@ -16,7 +16,7 @@ app.use(express.json());
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api", todoRoutes);
-app.use("/api", collectionRoutes);
+app.use("/api", collectionsRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

@@ -1,8 +1,8 @@
-const db = require("../db");
+import pool from "../db.js";
 
 const Collection = {
   create: async (title, user_id) => {
-    const result = await db.query(
+    const result = await pool.query(
       "INSERT INTO collections (title, user_id) VALUES ($1, $2) RETURNING *",
       [title, user_id]
     );
@@ -10,7 +10,7 @@ const Collection = {
   },
 
   findAllByUser: async (user_id) => {
-    const result = await db.query(
+    const result = await pool.query(
       "SELECT * FROM collections WHERE user_id = $1",
       [user_id]
     );
@@ -18,15 +18,15 @@ const Collection = {
   },
 
   findById: async (id) => {
-    const result = await db.query("SELECT * FROM collections WHERE id = $1", [
+    const result = await pool.query("SELECT * FROM collections WHERE id = $1", [
       id,
     ]);
     return result.rows[0];
   },
 
   deleteById: async (id) => {
-    await db.query("DELETE FROM collections WHERE id = $1", [id]);
+    await pool.query("DELETE FROM collections WHERE id = $1", [id]);
   },
 };
 
-module.exports = Collection;
+export default Collection;
