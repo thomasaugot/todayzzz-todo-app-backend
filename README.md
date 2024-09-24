@@ -1,4 +1,4 @@
-# TODAYZZZ TODOS - Backend PERN stack / hosted on Fly.io
+# TODAYZZZ TODOS - Backend PERN stack - hosted on Fly.io
 
 This is the backend of my todo list app I named TODAYZZZ TODOS, providing a RESTful API for managing users, collections, and todo items. <br>
 For the frontend code, please go to https://github.com/thomasaugot/todayzzz-todo-app-frontend
