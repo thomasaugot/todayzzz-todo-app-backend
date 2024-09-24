@@ -6,7 +6,6 @@ const collectionRoutes = require("./routes/collectionRoutes");
 const dotenv = require("dotenv");
 
 dotenv.config();
-
 const app = express();
 const PORT = process.env.PORT || 5000;
 
