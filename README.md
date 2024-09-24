@@ -81,12 +81,12 @@ The server should now be running and listening on the specified port.
    Endpoint: GET /api/collections/:collection_id<br>
    Response: Collection information by ID
 
-8. <b>Update Collection by ID</b><br>
+8. <b>Update a Collection by ID</b><br>
    Endpoint: PUT /api/collections/:collection_id<br>
    Request Body: JSON with updated collection information<br>
    Response: Updated collection information
 
-9. <b>Delete Collection by ID</b><br>
+9. <b>Delete a Collection by ID</b><br>
    Endpoint: DELETE /api/collections/:collection_id<br>
    Response: No content
 
